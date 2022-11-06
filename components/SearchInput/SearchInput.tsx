@@ -6,10 +6,12 @@ type Props = {
     setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
+const DEBOUNCE_TIMEOUT = 500
+
 const SearchInput = ({setQuery}:Props) => {
     const [search,setSearch] = useState('')
 
-    const debounceSearch = useCallback(_debounce(setQuery,500),[])
+    const debounceSearch = useCallback(_debounce(setQuery,DEBOUNCE_TIMEOUT),[])
 
 
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{

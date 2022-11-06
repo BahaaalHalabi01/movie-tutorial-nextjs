@@ -1,4 +1,6 @@
 import type { NextPage } from 'next'
+//config
+import { IMAGE_BASE_URL,BACKDROP_SIZE,POSTER_SIZE } from '../config'
 //hooks
 import { useState } from 'react'
 import { useFetchMovies } from '../api/fetchHooks'
@@ -16,15 +18,27 @@ const Home: NextPage = () => {
   const [query,setQuery] = useState('')
   const {data,fetchNextPage,isLoading,isFetching,error} = useFetchMovies(query)
 
+  const result = data?.pages[0].results[0]
 
   return (
-    <main className='relative h-screen overflow-y-scroll'>
+    <main className="relative h-screen overflow-y-scroll">
       <Header setQuery={setQuery} />
-      <Hero/>
-      <Grid/>
-      <Card/>
-      <Spinner/>
-      </main>
+      {!query && data && data.pages && result ? (
+        <Hero
+          imgUrl={
+            result.backdrop_path
+              ? IMAGE_BASE_URL + BACKDROP_SIZE + result.backdrop_path
+              : '/no_image.jgp'
+          }
+          title={result.title}
+          text={result.overview}
+        />
+      ) : null}
+
+      <Grid />
+      <Card />
+      <Spinner />
+    </main>
   )
 }
 
