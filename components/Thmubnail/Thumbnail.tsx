@@ -7,13 +7,13 @@ type Props = {
 const Thumbnail: React.FC<Props> = ({ imgUrl }) => {
   return (
     <Image
-      placeholder="blur"
-      blurDataURL="/placeholder.jpg"
-      className="rounded-lg "
-      layout="fill"
-      objectFit="cover"
+      placeholder='blur'
+      blurDataURL='/placeholder.jpg'
+      className='rounded-t-lg '
+      layout='fill'
+      objectFit='cover'
       src={imgUrl}
-      alt="thumbnail"
+      alt='thumbnail'
     />
   )
 }
