@@ -13,11 +13,11 @@ import Spinner from '../components/Spinner/Spinner'
 
 
 
+
 const Home: NextPage = () => {
-
-  const [query,setQuery] = useState('')
-  const {data,fetchNextPage,isLoading,isFetching,error} = useFetchMovies(query)
-
+  const [query, setQuery] = useState('')
+  const { data, fetchNextPage, isLoading, isFetching, error } =
+    useFetchMovies(query)
 
   const result = data?.pages[0].results[0]
 
@@ -47,12 +47,21 @@ const Home: NextPage = () => {
         {data && data.pages
           ? data.pages.map((page) =>
               page.results.map((movie) => (
-                <div key={movie.id}>{movie.original_title}</div>
+                <div key={movie.id}>
+                  <Card
+                    imgUrl={
+                      movie.poster_path
+                        ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+                        : '/no_image.jpg'
+                    }
+                    title={movie.title}
+                  />
+                </div>
               ))
             )
           : null}
       </Grid>
-      <Card />
+
       <Spinner />
     </main>
   )
