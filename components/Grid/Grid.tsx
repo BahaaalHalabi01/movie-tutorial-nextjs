@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode
 }
 
-const Grid = ({ title, children, className }: Props) => {
+const Grid: React.FC<Props> = ({ title, children, className }) => {
   return (
     <div className={className}>
       <h2 className="text-xl font-bold pb-4">{title}</h2>

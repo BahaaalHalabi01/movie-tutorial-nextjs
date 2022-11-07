@@ -6,7 +6,7 @@ type Props = {
   text: string
 }
 
-const Hero = ({ imgUrl, title, text }: Props) => {
+const Hero: React.FC<Props> = ({ imgUrl, title, text }) => {
   return (
     <div className="relative w-full h-128">
       <div className="relative flex flex-col-reverse h-full max-w-7xl m-auto z-10 pb-12 text-center md:text-left">
