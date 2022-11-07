@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 //config
 import { IMAGE_BASE_URL,BACKDROP_SIZE,POSTER_SIZE } from '../config'
 //hooks
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useFetchMovies } from '../api/fetchHooks'
 //Components
 import Header from '../components/Header/Header'
@@ -11,9 +11,6 @@ import Grid from '../components/Grid/Grid'
 import Card from '../components/Card/Card'
 import Spinner from '../components/Spinner/Spinner'
 
-
-
-
 const Home: NextPage = () => {
   const [query, setQuery] = useState('')
   const { data, fetchNextPage, isLoading, isFetching, error } =
@@ -21,8 +18,16 @@ const Home: NextPage = () => {
 
   const result = data?.pages[0].results[0]
 
+  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
+    const { scrollTop, clientHeight, scrollHeight } = e.currentTarget
+    if (scrollHeight - scrollTop === clientHeight) fetchNextPage()
+  }
+
   return (
-    <main className="relative h-screen overflow-y-scroll">
+    <main
+      className='relative h-screen overflow-y-scroll'
+      onScroll={handleScroll}
+    >
       <Header setQuery={setQuery} />
       {!query && data && data.pages && result ? (
         <Hero
@@ -37,7 +42,7 @@ const Home: NextPage = () => {
       ) : null}
 
       <Grid
-        className="p-4 max-w-7xl m-auto"
+        className='p-4 max-w-7xl m-auto'
         title={
           query
             ? `Search Results: ${data?.pages[0]?.total_results}`
@@ -62,7 +67,7 @@ const Home: NextPage = () => {
           : null}
       </Grid>
 
-      <Spinner />
+      {isLoading || isFetching ? <Spinner /> : null}
     </main>
   )
 }
