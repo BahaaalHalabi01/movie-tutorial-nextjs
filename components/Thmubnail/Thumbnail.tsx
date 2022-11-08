@@ -11,7 +11,7 @@ const Thumbnail: React.FC<Props> = ({ imgUrl }) => {
       blurDataURL='/placeholder.jpg'
       className='rounded-t-lg '
       layout='fill'
-      objectFit='cover'
+      objectFit='fill'
       src={imgUrl}
       alt='thumbnail'
     />

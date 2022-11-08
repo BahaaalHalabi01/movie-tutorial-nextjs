@@ -28,7 +28,14 @@ const Movie: NextPage<Props> = ({ movie, cast, directors }) => (
   <main>
     <Header />
     <Breadcrumb title={movie.original_title} />
-    <MovieInfo />
+    <MovieInfo
+      rating={movie.vote_average}
+      thumbUrl={
+        movie.poster_path
+          ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+          : '/no_image.jgp'
+      }
+    />
     <Grid>
       <Card />
     </Grid>
