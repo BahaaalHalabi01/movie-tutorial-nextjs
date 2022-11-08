@@ -1,6 +1,7 @@
+import Link from 'next/link'
 import type { NextPage } from 'next'
 //config
-import { IMAGE_BASE_URL,BACKDROP_SIZE,POSTER_SIZE } from '../config'
+import { IMAGE_BASE_URL, BACKDROP_SIZE, POSTER_SIZE } from '../config'
 //hooks
 import React, { useState } from 'react'
 import { useFetchMovies } from '../api/fetchHooks'
@@ -52,16 +53,18 @@ const Home: NextPage = () => {
         {data && data.pages
           ? data.pages.map((page) =>
               page.results.map((movie) => (
-                <div key={movie.id}>
-                  <Card
-                    imgUrl={
-                      movie.poster_path
-                        ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
-                        : '/no_image.jpg'
-                    }
-                    title={movie.title}
-                  />
-                </div>
+                <Link key={movie.id} href={`/${movie.id}`}>
+                  <div className='cursor-pointer hover:opacity-80 duration-300'>
+                    <Card
+                      imgUrl={
+                        movie.poster_path
+                          ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+                          : '/no_image.jpg'
+                      }
+                      title={movie.title}
+                    />
+                  </div>
+                </Link>
               ))
             )
           : null}
