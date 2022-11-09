@@ -48,8 +48,19 @@ const Movie: NextPage<Props> = ({ movie, cast, directors }) => (
       revenue={movie.revenue}
       budget={movie.budget}
     />
-    <Grid>
-      <Card />
+    <Grid className='p-4 max-w-7xl m-auto' title='Actors'>
+      {cast.map((actor) => (
+        <Card
+          key={actor.credit_id}
+          imgUrl={
+            actor.profile_path
+              ? IMAGE_BASE_URL + POSTER_SIZE + actor.profile_path
+              : '/no_image.jpg'
+          }
+          title={actor.name}
+          subtitle={actor.character}
+        />
+      ))}
     </Grid>
   </main>
 )
