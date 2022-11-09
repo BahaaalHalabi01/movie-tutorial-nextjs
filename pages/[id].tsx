@@ -75,20 +75,24 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const movieEndPoint: string = movieUrl(id)
   const creditsEndPPoint: string = creditsUrl(id)
 
-  const movie = await basicFetch<Movie>(movieEndPoint)
-  const credits = await basicFetch<Credits>(creditsEndPPoint)
+  try {
+    const movie = await basicFetch<Movie>(movieEndPoint)
+    const credits = await basicFetch<Credits>(creditsEndPPoint)
+    //get the directors only
+    const directors = credits.crew.filter((member) => member.job === 'Director')
 
-  //get the directors only
-  const directors = credits.crew.filter((member) => member.job === 'Director')
-
-  return {
-    props: {
-      movie,
-      directors,
-      cast: credits.cast,
-    },
-    revalidate: REBUILD_TIME,
+    return {
+      props: {
+        movie,
+        directors,
+        cast: credits.cast,
+      },
+      revalidate: REBUILD_TIME,
+    }
+  } catch {
+    return { props: {}, notFound: true }
   }
+ 
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
