@@ -28,9 +28,9 @@ const SearchInput: React.FC<Props> = ({ setQuery }) => {
         value={search}
         onChange={handleChange}
       />
-      <div className='absolute right-4'>
+      <span className='absolute right-28'>
         <Image width='30' height='32' src='/tmdb-logo.svg' alt='logo' />
-      </div>
+      </span>
     </>
   )
 }

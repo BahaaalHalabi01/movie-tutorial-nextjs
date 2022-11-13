@@ -2,6 +2,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 //Components
 import SearchInput from '../SearchInput/SearchInput'
+//nextauth
+import {signOut} from 'next-auth/react'
+//icons 
+import {FaHandPeace} from 'react-icons/fa'
 
 
 type Props = {
@@ -33,8 +37,16 @@ const Header: React.FC<Props> = ({ setQuery }) => {
           </div>
         </Link>
         {setQuery ? (
-          <div className='relative flex items-center'>
+          <div className='relative flex items-center justify-between'>
             <SearchInput setQuery={setQuery} />
+
+            <button
+              className='bg-zinc-700 ml-2 h-10 w-20 text-md rounded-full text-white text-center items-center flex justify-center'
+              onClick={() => signOut()}
+            >
+              Bye!
+              <FaHandPeace className='ml-1' />
+            </button>
           </div>
         ) : null}
       </div>
