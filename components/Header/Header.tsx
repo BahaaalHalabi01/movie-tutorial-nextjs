@@ -16,7 +16,7 @@ const Header: React.FC<Props> = ({ setQuery }) => {
   return (
     <div className='sticky flex top-0  z-40 w-full h-20 bg-zinc-900'>
       <div className='flex justify-between h-full w-full max-w-8xl px-4 m-auto '>
-        <Link href='/'>
+        <Link href='/account'>
           <div className='flex items-center cursor-pointer h-full'>
             <div className='hidden md:inline'>
               <Image
