@@ -3,6 +3,7 @@ import { PrismaLibSQL } from '@prisma/adapter-libsql'
 import { createClient } from '@libsql/client'
 
 const dev = process.env.NODE_ENV === 'development'
+ // const dev = true
 
 const libsql = createClient({
   url: dev ? 'file:./prisma/local.db' : process.env.DATABASE_URL!,
