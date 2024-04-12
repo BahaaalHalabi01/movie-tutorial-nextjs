@@ -6,7 +6,7 @@ const dev = process.env.NODE_ENV === 'development'
  // const dev = true
 
 const libsql = createClient({
-  url: dev ? 'file:./prisma/local.db' : process.env.DATABASE_URL!,
+  url: dev ? 'http://127.0.0.1:8080' : process.env.DATABASE_URL!,
   authToken: dev ? undefined : `${process.env.AUTH_TOKEN}`,
 })
 
