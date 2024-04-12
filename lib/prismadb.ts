@@ -1,10 +1,15 @@
 import { PrismaClient } from '@prisma/client'
+import { PrismaLibSQL } from '@prisma/adapter-libsql'
+import { createClient } from '@libsql/client'
 
-declare global {
-  var prisma: PrismaClient | undefined
-}
+const dev = process.env.NODE_ENV === 'development'
 
-const client = globalThis.prisma || new PrismaClient()
-if (process.env.NODE_ENV !== 'production') globalThis.prisma = client
+const libsql = createClient({
+  url: dev ? 'file:./prisma/local.db' : process.env.DATABASE_URL!,
+  authToken: dev ? undefined : `${process.env.AUTH_TOKEN}`,
+})
 
-export default client
+const adapter = new PrismaLibSQL(libsql)
+const prisma = new PrismaClient({ adapter })
+
+export default prisma
