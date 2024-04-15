@@ -17,7 +17,6 @@ import Card from '../components/Card/Card'
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import type { Movie, Credits, Crew, Cast } from '../api/types'
 
-
 type Props = {
   movie: Movie
   directors: Crew[]
@@ -68,8 +67,6 @@ const Movie: NextPage<Props> = ({ movie, cast, directors }) => (
 export default Movie
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const REBUILD_TIME = 86400
-
   const id = context.params?.id as string
 
   const movieEndPoint: string = movieUrl(id)
@@ -87,12 +84,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
         directors,
         cast: credits.cast,
       },
-      revalidate: REBUILD_TIME,
     }
   } catch {
     return { props: {}, notFound: true }
   }
- 
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

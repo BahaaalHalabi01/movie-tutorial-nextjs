@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import React, { useState,useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import _debounce from 'lodash/debounce'
 
 type Props = {
-    setQuery: React.Dispatch<React.SetStateAction<string>>;
+  setQuery: React.Dispatch<React.SetStateAction<string>>
 }
 
 const DEBOUNCE_TIMEOUT = 500
@@ -22,13 +22,13 @@ const SearchInput: React.FC<Props> = ({ setQuery }) => {
   return (
     <>
       <input
-        className='h-10 pr-14 md:w-96 rounded-full p-4 text-md bg-zinc-700 text-white focus:outline-none focus:border focus:border-solid focus:border-cyan-200'
+        className='h-10 pr-14 md:max-w-96 rounded-full p-4 text-md bg-zinc-700 text-white focus:outline-none focus:border focus:border-solid focus:border-cyan-200'
         type='text'
         placeholder='Search Movie'
         value={search}
         onChange={handleChange}
       />
-      <span className='absolute right-28'>
+      <span className='absolute right-4'>
         <Image width='30' height='32' src='/tmdb-logo.svg' alt='logo' />
       </span>
     </>
