@@ -10,6 +10,7 @@ import Header from '../components/Header/Header'
 import Hero from '../components/Hero/Hero'
 import Grid from '../components/Grid/Grid'
 import Card from '../components/Card/Card'
+import { Error } from '../components/Error/Error'
 import Spinner from '../components/Spinner/Spinner'
 
 const Home: NextPage = () => {
@@ -24,7 +25,7 @@ const Home: NextPage = () => {
     if (scrollHeight - scrollTop === clientHeight) fetchNextPage()
   }
 
-  // if (error) return <div>Something went wrong. Please refresh page</div>
+  const loading = isFetching || isLoading
 
   return (
     <main
@@ -70,9 +71,13 @@ const Home: NextPage = () => {
               ))
             )
           : null}
+        {loading && !error ? <Spinner /> : null}
+        {error && !loading ? (
+          <div className='col-span-full'>
+            <Error />
+          </div>
+        ) : null}
       </Grid>
-
-      {isLoading || isFetching ? <Spinner /> : null}
     </main>
   )
 }
